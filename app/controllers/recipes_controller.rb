@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1
   def show
-    render json: @recipe
+    render json: "{ \"message\": \"Recipe details by id\", \"recipe\": #{@recipe.to_json} }"
   end
 
   # POST /recipes
