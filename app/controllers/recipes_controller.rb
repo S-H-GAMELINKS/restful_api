@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   def update
     if @recipe.update(recipe_params)
-      render json: @recipe
+      render json: "{ \"message\": \"Recipe successfully updated!\", \"recipe\": #{@recipe.to_json} }"
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
@@ -34,7 +34,8 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1
   def destroy
-    if @recipe.destroy
+    if @recipe != nil
+      @recipe.destroy
       response = {"message" => "Recipe successfully removed!"}
       render json: response
     else
@@ -46,7 +47,7 @@ class RecipesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
-      @recipe = Recipe.find(params[:id])
+      @recipe = Recipe.find_by_id(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
