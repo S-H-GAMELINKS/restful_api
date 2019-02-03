@@ -17,9 +17,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
+      render json: "{ \"message\": \"Recipe successfully created!\", \"recipe\": #{@recipe.to_json} }"
     else
-      render json: @recipe.errors, status: :unprocessable_entity
+      render json: "{ \"message\": \"Recipe creation failed!\", \"required\": \"title, making_time, serves, ingredients, cost\" }"
     end
   end
 
