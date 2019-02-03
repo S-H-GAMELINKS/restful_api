@@ -19,7 +19,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       render json: "{ \"message\": \"Recipe successfully created!\", \"recipe\": #{@recipe.to_json} }"
     else
-      render json: "{ \"message\": \"Recipe creation failed!\", \"required\": \"title, making_time, serves, ingredients, cost\" }", :status => 200
+      render json: "{ \"message\": \"Recipe creation failed!\", \"required\": \"title, making_time, serves, ingredients, cost\" }", :status => :success
     end
   end
 
