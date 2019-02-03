@@ -5,7 +5,9 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
 
-    render json: @recipes
+    response = @recipes.to_json
+
+    render json: "{\"recipes\": #{response} }"
   end
 
   # GET /recipes/1
@@ -35,7 +37,13 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1
   def destroy
-    @recipe.destroy
+    if @recipe.destroy
+      response = {"message" => "Recipe successfully removed!"}
+      render json: response
+    else
+      response = {"message" => "No Recipe found"}
+      render json: response
+    end
   end
 
   private
